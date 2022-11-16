@@ -96,3 +96,90 @@ out.print(session.getAttribute("curso"));
 %>
 </body>
 </html>
+
+/////////////////////////////////////////
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+   <form action='Cadastro' method='post'>
+    
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" /> <br><br>
+    
+    <label for="endereco">Endereço:</label>
+    <input type="text" id="endereco" name="endereco" /> <br><br>
+    
+    <label for="bairro">Bairro:</label>
+    <input type="text" id="bairro" name="bairro" /> <br><br>
+    
+    <label for="cidade">Cidade:</label>
+    <input type="text" id="cidade" name="cidade" /> <br><br>
+    
+    <label for="cep">CEP:</label>
+    <input type="text" id="cep" name="cep" /> <br><br>
+    
+    <label for="telefone">Telefone:</label>
+    <input type="text" id="telefone" name="telefone" /> <br><br>
+    
+    <input type="submit" value="Cadastrar" />
+    
+  </form>
+</body>
+</html>
+	
+	
+////////////////
+	
+package ifsp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/Cadastro")
+public class Cadastro extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Cadastro() {
+    }
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nome = request.getParameter("nome");
+		String endereco = request.getParameter("endereco");
+		String bairro = request.getParameter("bairro");
+		String cidade = request.getParameter("cidade");
+		String cep = request.getParameter("cep");
+		String telefone = request.getParameter("telefone");
+		
+		if (nome.isBlank() || endereco.isBlank() || bairro.isBlank() || cidade.isBlank() || cep.isBlank() || telefone.isBlank()) {
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} else {
+			PrintWriter out = response.getWriter();
+			out.print("Cadastro realizado ocm sucesso");
+		}
+		doGet(request, response);
+	}
+
+}
